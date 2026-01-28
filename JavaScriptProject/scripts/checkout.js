@@ -3,7 +3,7 @@ import { products }  from "../data/products.js"
 import { formatCurrency } from "./utils.js/money.js";
 
 let totalhtml=0;
-cart.forEach((cartItem) => {
+function ShowCart(){cart.forEach((cartItem) => {
  const productId=cartItem.productId;
  let match=null;
  console.log(productId);
@@ -14,7 +14,7 @@ cart.forEach((cartItem) => {
  });
  
 if(match){
-totalhtml += `  <div class="cart-item-container">
+totalhtml += `  <div class="cart-item-container js-cart-remove-${match.id}">
 <div class="delivery-date">
 Delivery date: Tuesday, June 21
 </div>
@@ -91,12 +91,17 @@ src="${match.image}">
 </div>`;
 }
 });
-console.log(totalhtml);
 document.querySelector(".cartItem").innerHTML=totalhtml;
+}
+ShowCart()
+console.log(totalhtml);
+
 document.querySelectorAll(".js-del").forEach((link)=>{
  link.addEventListener("click",()=>{
  const pid= link.dataset.productId;
  removeFromCart(pid);
- console.log(cart);
+  const container=document.querySelector(`.js-cart-remove-${pid}`);
+  // here remove the product from cart
+  container.remove();
  });
 });
