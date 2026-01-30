@@ -3,6 +3,7 @@ import { products } from '../data/products.js';                                i
                                                                              
 let productsHtml='';
 products.forEach((product) => {
+  console.log(product);
     productsHtml += `
     <div class="product-container">
       <div class="product-image-container">
